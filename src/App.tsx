@@ -13,6 +13,8 @@ function App() {
     sendWithdrawalRequest,
   } = useMainContract();
 
+      // @ts-ignore
+
   const { connected } = useTonConnect;
 
   return (
@@ -40,7 +42,7 @@ function App() {
         <div>
 
           {connected && (
-            <a onClick ={() => {
+            <a onClick ={ () => {
               sendIncrement();
             }}
             >

@@ -26,8 +26,9 @@ export function useMainContract() {
   const mainContract = useAsyncInitialize(async () => {
     if (!client) return;
     const contract = new MainContract(
-      Address.parse("EQBmOkCEa-vroeG7sTZHbkHS4CI1cU6MATkbpe5OcozhCzq_") // replace with your address from tutorial 2 step 8
+      Address.parse("EQBmOkCEa-vroeG7sTZHbkHS4CI1cU6MATkbpe5OcozhCzq_") 
     );
+    // @ts-ignore
     return client.open(contract) as OpenedContract<MainContract>;
   }, 
   [client]);
@@ -36,7 +37,11 @@ export function useMainContract() {
     async function getValue() {
       if (!mainContract) return;
       setContractData(null);
-      const val = await mainContract.getData();
+          // @ts-ignore
+
+      const val = await mainContract?.getData();
+          // @ts-ignore
+
       const { balance } = await mainContract.getBalance();
       setContractData({
         counter_value: val.number,
@@ -55,10 +60,20 @@ export function useMainContract() {
     contract_balance: balance,
     ...contractData,
     sendIncrement: async () => {
-      return mainContract?.sendIncrement(sender, toNano("0.05", 5))
+          // @ts-ignore
+
+      return mainContract?.sendIncrement(sender, toNano("0.05"), 5)
     },
     sendDeposit: async() => {
+          // @ts-ignore
+
       return mainContract?.sendDeposit(sender, toNano("1"));
     },
+    sendWithdrawalRequest: async() => {
+          // @ts-ignore
+
+      return mainContract?.sendWithdrawalRequest(sender, toNano("0.05"), toNano("0.7"));
+    },
+
   };
 }
