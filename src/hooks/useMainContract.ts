@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { MainContract } from "../contracts/MainContract";
 import { useTonClient } from "./useTonClient";
 import { useAsyncInitialize } from "./useAsyncInitialize";
-import { Address, OpenedContract } from "ton-core";
+import { Address } from "ton-core";
 import { toNano } from "ton-core";
 import { useTonConnect } from "./useTonconnect";
 
@@ -28,8 +28,7 @@ export function useMainContract() {
     const contract = new MainContract(
       Address.parse("EQBmOkCEa-vroeG7sTZHbkHS4CI1cU6MATkbpe5OcozhCzq_") 
     );
-    // @ts-ignore
-    return client.open(contract) as OpenedContract<MainContract>;
+    return contract.run;
   }, 
   [client]);
 
@@ -37,11 +36,7 @@ export function useMainContract() {
     async function getValue() {
       if (!mainContract) return;
       setContractData(null);
-          // @ts-ignore
-
       const val = await mainContract?.getData();
-          // @ts-ignore
-
       const { balance } = await mainContract.getBalance();
       setContractData({
         counter_value: val.number,
@@ -60,18 +55,12 @@ export function useMainContract() {
     contract_balance: balance,
     ...contractData,
     sendIncrement: async () => {
-          // @ts-ignore
-
       return mainContract?.sendIncrement(sender, toNano("0.05"), 5)
     },
     sendDeposit: async() => {
-          // @ts-ignore
-
       return mainContract?.sendDeposit(sender, toNano("1"));
     },
     sendWithdrawalRequest: async() => {
-          // @ts-ignore
-
       return mainContract?.sendWithdrawalRequest(sender, toNano("0.05"), toNano("0.7"));
     },
 

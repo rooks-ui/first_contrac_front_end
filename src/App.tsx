@@ -13,9 +13,8 @@ function App() {
     sendWithdrawalRequest,
   } = useMainContract();
 
-      // @ts-ignore
-
-  const { connected } = useTonConnect;
+  const tonConnect = useTonConnect();
+  const { connected } = tonConnect;
 
   return (
     <div>

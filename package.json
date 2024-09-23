@@ -12,10 +12,11 @@
   "dependencies": {
     "@orbs-network/ton-access": "^2.3.3",
     "@ton/crypto": "^3.3.0",
+    "@tonclient/core": "^1.30.0",
     "@tonconnect/ui-react": "^2.0.9",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "ton": "^13.9.0",
+    "ton": "^6.13.1",
     "ton-core": "^0.53.0",
     "ton-crypto": "^3.2.0",
     "vite-plugin-node-polyfills": "^0.22.0"
@@ -23,6 +24,7 @@
   "devDependencies": {
     "@eslint/js": "^9.9.0",
     "@ton/core": "^0.58.1",
+    "@types/node": "^22.6.0",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.1",
