@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import { MainContract } from "../contracts/MainContract";
 import { useTonClient } from "./useTonClient";
 import { useAsyncInitialize } from "./useAsyncInitialize";
-import { Address } from "ton-core";
-import { toNano } from "ton-core";
+import { Address, toNano, Contract} from "@ton/core";
 import { useTonConnect } from "./useTonconnect";
 
 
@@ -21,23 +20,24 @@ export function useMainContract() {
     owner_address: Address;
   }>();
 
-  const [balance, setBalance] = useState<(null) | number>(0);
+  const [balance, setBalance] = useState<bigint | null>(null);
 
   const mainContract = useAsyncInitialize(async () => {
     if (!client) return;
     const contract = new MainContract(
-      Address.parse("EQBmOkCEa-vroeG7sTZHbkHS4CI1cU6MATkbpe5OcozhCzq_") 
+      Address.parse("EQBmOkCEa-vroeG7sTZHbkHS4CI1cU6MATkbpe5OcozhCzq_"),
     );
-    return contract.run;
+
+    return client.open(contract as unknown as Contract);
   }, 
   [client]);
 
   useEffect(() => {
     async function getValue() {
-      if (!mainContract) return;
+      if (!mainContract || !client) return;
       setContractData(null);
-      const val = await mainContract?.getData();
-      const { balance } = await mainContract.getBalance();
+      const val = await mainContract.getData();
+      const balance = await client.getBalance(mainContract.address);
       setContractData({
         counter_value: val.number,
         recent_sender: val.recent_sender,
@@ -48,7 +48,7 @@ export function useMainContract() {
       getValue();
     }
     getValue();
-  }, [mainContract]);
+  }, [mainContract, client]);
 
   return {
     contract_address: mainContract?.address.toString(),

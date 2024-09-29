@@ -16,8 +16,8 @@
     "@tonconnect/ui-react": "^2.0.9",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "ton": "^6.13.1",
-    "ton-core": "^0.53.0",
+    "@ton/ton": "^13.4.1",
+    "@ton/core": "^0.49.0",
     "ton-crypto": "^3.2.0",
     "vite-plugin-node-polyfills": "^0.22.0"
   },
@@ -35,5 +35,9 @@
     "typescript": "^5.5.3",
     "typescript-eslint": "^8.0.1",
     "vite": "^5.4.1"
-  }
+  },
+  "main": "index.js",
+  "repository": "https://github.com/rooks-ui/first_contrac_front_end.git",
+  "author": "Faruk Umar <blackmallam05@gmail.com>",
+  "license": "MIT"
 }

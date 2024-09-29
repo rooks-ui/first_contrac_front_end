@@ -24,10 +24,6 @@ export function mainContractConfigToCell(config: MainContractConfig): Cell {
   }
   
   export class MainContract implements Contract {
-    run: any;
-      static getData() {
-          throw new Error("Method not implemented.");
-      }
     constructor(
       readonly address: Address,
       readonly init?: { code: Cell; data: Cell }
