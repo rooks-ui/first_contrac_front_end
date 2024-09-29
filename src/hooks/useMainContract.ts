@@ -36,18 +36,26 @@ export function useMainContract() {
     async function getValue() {
       if (!mainContract) return;
       setContractData(null);
-      const val = await mainContract.getData();
-      const balance = await mainContract.getBalance();
-      setContractData({
-        counter_value: val.number,
-        recent_sender: val.recent_sender,
-        owner_address: val.owner_address,
-      });
-      setBalance(balance);
-      await sleep(500);
+      try{
+        const val = await mainContract.getData();
+        const balanceData = await mainContract.getBalance();
+        setContractData({
+          counter_value: val.number,
+          recent_sender: val.recent_sender,
+          owner_address: val.owner_address,
+        });
+
+        setBalance(balanceData.number);
+
+        await sleep(500);
+        getValue();
+      } catch(error) {
+        console.error('Error fetching contract data:', error);
+        setContractData(null);
+        setBalance(null);
+      }
+      }
       getValue();
-    }
-    getValue();
   }, [mainContract]);
 
   return {
