@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { MainContract } from "../contracts/MainContract";
 import { useTonClient } from "./useTonClient";
 import { useAsyncInitialize } from "./useAsyncInitialize";
-import { Address, toNano, Contract} from "@ton/core";
+import { Address, toNano} from "@ton/core";
 import { useTonConnect } from "./useTonconnect";
 
 
@@ -28,7 +28,7 @@ export function useMainContract() {
       Address.parse("EQBmOkCEa-vroeG7sTZHbkHS4CI1cU6MATkbpe5OcozhCzq_"),
     );
 
-    return client.open(contract as unknown as Contract);
+    return client.open(contract);
   }, 
   [client]);
 
