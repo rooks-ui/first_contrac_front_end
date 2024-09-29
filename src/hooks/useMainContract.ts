@@ -20,7 +20,7 @@ export function useMainContract() {
     owner_address: Address;
   }>();
 
-  const [balance, setBalance] = useState<bigint | null>(null);
+  const [balance, setBalance] = useState<null | number>(0);
 
   const mainContract = useAsyncInitialize(async () => {
     if (!client) return;
@@ -34,10 +34,10 @@ export function useMainContract() {
 
   useEffect(() => {
     async function getValue() {
-      if (!mainContract || !client) return;
+      if (!mainContract) return;
       setContractData(null);
       const val = await mainContract.getData();
-      const balance = await client.getBalance(mainContract.address);
+      const balance = await mainContract.getBalance();
       setContractData({
         counter_value: val.number,
         recent_sender: val.recent_sender,
@@ -48,7 +48,7 @@ export function useMainContract() {
       getValue();
     }
     getValue();
-  }, [mainContract, client]);
+  }, [mainContract]);
 
   return {
     contract_address: mainContract?.address.toString(),
