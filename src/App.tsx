@@ -46,7 +46,6 @@ const showAlert = () => {
           <div>{counter_value ?? "Loading..."}</div>
         </div>
 
-        <div>
 
           {connected && (
             <a onClick ={ () => {
@@ -91,7 +90,6 @@ const showAlert = () => {
             </a>
           )}
           
-        </div>
       </div>
 
     </div>
