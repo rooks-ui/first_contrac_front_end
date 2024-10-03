@@ -47,14 +47,12 @@ const showAlert = () => {
         </div>
 
 
-          {connected && (
             <a onClick ={ () => {
              showAlert();
             }}
             >
               Hey there!
             </a>
-          )}
 
           <br />
 
