@@ -48,7 +48,7 @@ const showAlert = () => {
 
         <div>
 
-        {connected && (
+          {connected && (
             <a onClick ={ () => {
              showAlert();
             }}
